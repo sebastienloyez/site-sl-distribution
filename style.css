@@ -124,6 +124,23 @@ ol.etapes b{color:var(--bleu-fonce)}
   .mosaique a .legende{opacity:1;font-size:12.5px;padding:20px 10px 8px}
 }
 
+/* --- carte des chantiers --- */
+.carte-bloc{position:relative;border-radius:8px;overflow:hidden;border:1px solid var(--bord);
+            background:var(--fond-doux)}
+.carte-bloc img{display:block;width:100%}
+.pastille{position:absolute;transform:translate(-50%,-50%);width:13px;height:13px;
+          border-radius:50%;background:var(--bleu);border:2px solid #fff;
+          box-shadow:0 1px 5px rgba(10,40,60,.4);transition:transform .2s ease;z-index:1}
+.pastille.moyen{width:18px;height:18px}
+.pastille.grand{width:24px;height:24px;background:var(--bleu-fonce)}
+.pastille:hover{transform:translate(-50%,-50%) scale(1.4);z-index:3}
+.pastille .etiquette{position:absolute;bottom:135%;left:50%;transform:translateX(-50%);
+                     background:#0f2a3d;color:#fff;font-size:12.5px;line-height:1.3;
+                     padding:5px 10px;border-radius:5px;white-space:nowrap;
+                     opacity:0;pointer-events:none;transition:opacity .15s ease}
+.pastille:hover .etiquette{opacity:1}
+.attribution{font-size:12px;color:var(--gris);margin-top:8px}
+
 /* --- format 2 : ruban qui defile en continu --- */
 .ruban{overflow:hidden;background:#0f2a3d;padding:14px 0;position:relative}
 .ruban-piste{display:flex;gap:10px;width:max-content;
