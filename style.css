@@ -95,8 +95,8 @@ nav.principale a.devis:hover{transform:translateY(-2px);letter-spacing:normal;
 /* --- portrait / un seul interlocuteur --- */
 .duo{display:grid;grid-template-columns:1fr 240px;gap:36px;align-items:center}
 .duo .portrait{justify-self:center}
-.duo .portrait img{max-width:240px;display:block;filter:drop-shadow(0 10px 24px rgba(20,50,75,.25))}
-@media (max-width:700px){.duo{grid-template-columns:1fr}.duo .portrait{order:-1}.duo .portrait img{max-width:180px}}
+.duo .portrait img{max-width:185px;display:block;filter:drop-shadow(0 10px 24px rgba(20,50,75,.25))}
+@media (max-width:700px){.duo{grid-template-columns:1fr}.duo .portrait{order:-1}.duo .portrait img{max-width:150px}}
 
 section{padding:42px 0;border-bottom:1px solid var(--bord)}
 section:last-of-type{border-bottom:0}
@@ -266,55 +266,45 @@ ol.etapes b{color:var(--bleu-fonce)}
        trace lent des croisillons par un petit point lumineux (0 -> 4 s),
        reflet de verre qui balaie (5,2 -> 6,8 s), effacement (7 -> 7,8 s).
        Motifs repris des modeles PRESSGLASS, redessines en traits fins. --- */
-svg.vitrage{position:absolute;inset:0;width:100%;height:100%;z-index:0;
-            animation:cycle-voile 30s linear infinite}
-.cadres .trait{stroke-dasharray:1;stroke-dashoffset:1;animation:cadre-trait 30s linear infinite}
+svg.vitrage{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.cadres .trait{stroke-dasharray:1;stroke-dashoffset:1;animation:trace-un 1s linear forwards}
 .cadres .pointe{stroke:#fff;stroke-opacity:1;stroke-width:2.2;stroke-linecap:round;
-                stroke-dasharray:.004 .996;stroke-dashoffset:1.004;
-                animation:cadre-pointe 30s linear infinite}
-.cadres g:nth-of-type(1) path{animation-delay:0s}
-.cadres g:nth-of-type(2) path{animation-delay:3s}
-.cadres g:nth-of-type(3) path{animation-delay:6s}
-.cadres g:nth-of-type(4) path{animation-delay:9s}
-.cadres g:nth-of-type(5) path{animation-delay:12s}
-.cadres g:nth-of-type(6) path{animation-delay:15s}
-.cadres g:nth-of-type(7) path{animation-delay:18s}
-.cadres g:nth-of-type(8) path{animation-delay:21s}
-@keyframes cadre-trait{0%{stroke-dashoffset:1}3.33%{stroke-dashoffset:0}
-  100%{stroke-dashoffset:0}}
-@keyframes cadre-pointe{0%{stroke-dashoffset:1.004;opacity:1}
-  3.33%{stroke-dashoffset:.004;opacity:1}3.8%{opacity:0}
-  100%{stroke-dashoffset:.004;opacity:0}}
+                stroke-dasharray:.004 .996;stroke-dashoffset:1.004;opacity:0;
+                animation:pointe-un 1s linear forwards}
+.cadres g:nth-of-type(1) path{animation-delay:.4s}
+.cadres g:nth-of-type(2) path{animation-delay:3.4s}
+.cadres g:nth-of-type(3) path{animation-delay:6.4s}
+.cadres g:nth-of-type(4) path{animation-delay:9.4s}
+.cadres g:nth-of-type(5) path{animation-delay:12.4s}
+.cadres g:nth-of-type(6) path{animation-delay:15.4s}
+.cadres g:nth-of-type(7) path{animation-delay:18.4s}
+.cadres g:nth-of-type(8) path{animation-delay:21.4s}
 .reflet{position:absolute;inset:0;z-index:1;pointer-events:none;
         background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.13) 50%,transparent 58%);
         background-size:50% 100%;background-repeat:no-repeat;background-position:-60% 0;
-        animation:cycle-reflet 30s ease-in-out infinite}
-.trace .trait{stroke-dasharray:1;stroke-dashoffset:1;animation:cycle-trait 30s linear infinite}
+        animation:cycle-reflet 14s ease-in-out 25s infinite}
+.trace .trait{stroke-dasharray:1;stroke-dashoffset:1;animation:trace-un 2s linear forwards}
 .trace .pointe{stroke:#fff;stroke-opacity:1;stroke-width:2.2;stroke-linecap:round;
-               stroke-dasharray:.004 .996;stroke-dashoffset:1.004;
-               animation:cycle-pointe 30s linear infinite}
-.trace g:nth-of-type(1) path{animation-delay:1s}
-.trace g:nth-of-type(2) path{animation-delay:4s}
-.trace g:nth-of-type(3) path{animation-delay:7s}
-.trace g:nth-of-type(4) path{animation-delay:10s}
-.trace g:nth-of-type(5) path{animation-delay:13s}
-.trace g:nth-of-type(6) path{animation-delay:16s}
-.trace g:nth-of-type(7) path{animation-delay:19s}
-.trace g:nth-of-type(8) path{animation-delay:22s}
-@keyframes cycle-trait{0%{stroke-dashoffset:1}6.67%{stroke-dashoffset:0}
-  100%{stroke-dashoffset:0}}
-@keyframes cycle-pointe{0%{stroke-dashoffset:1.004;opacity:1}
-  6.67%{stroke-dashoffset:.004;opacity:1}7.1%{opacity:0}
-  100%{stroke-dashoffset:.004;opacity:0}}
-@keyframes cycle-voile{0%,93%{opacity:1}97%{opacity:0}
-  99.9%{opacity:0}100%{opacity:1}}
-@keyframes cycle-reflet{0%,83%{background-position:-60% 0}
-  92%{background-position:160% 0}100%{background-position:160% 0}}
+               stroke-dasharray:.004 .996;stroke-dashoffset:1.004;opacity:0;
+               animation:pointe-un 2s linear forwards}
+.trace g:nth-of-type(1) path{animation-delay:1.4s}
+.trace g:nth-of-type(2) path{animation-delay:4.4s}
+.trace g:nth-of-type(3) path{animation-delay:7.4s}
+.trace g:nth-of-type(4) path{animation-delay:10.4s}
+.trace g:nth-of-type(5) path{animation-delay:13.4s}
+.trace g:nth-of-type(6) path{animation-delay:16.4s}
+.trace g:nth-of-type(7) path{animation-delay:19.4s}
+.trace g:nth-of-type(8) path{animation-delay:22.4s}
+@keyframes trace-un{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes pointe-un{0%{stroke-dashoffset:1.004;opacity:1}
+  96%{opacity:1}100%{stroke-dashoffset:.004;opacity:0}}
+@keyframes cycle-reflet{0%{background-position:-60% 0}
+  30%{background-position:160% 0}100%{background-position:160% 0}}
 @media (prefers-reduced-motion:reduce){
   .trace .trait{animation:none;stroke-dashoffset:0}
   .trace .pointe{animation:none;opacity:0}
-  .cadres path{animation:none;stroke-dashoffset:0}
-  svg.vitrage{animation:none}
+  .cadres .trait{animation:none;stroke-dashoffset:0}
+  .cadres .pointe{animation:none;opacity:0}
   .reflet{animation:none}}
 
 /* --- apparition au defilement (valide par Sebastien le 19/08) :
