@@ -227,7 +227,33 @@ ol.etapes b{color:var(--bleu-fonce)}
                      padding:5px 10px;border-radius:5px;white-space:nowrap;
                      opacity:0;pointer-events:none;transition:opacity .15s ease}
 .pastille:hover .etiquette{opacity:1}
+.pastille.coll{background:var(--accent)}
+.pastille.grand.coll{background:#d98a1f}
+.pastille.mixte{background:linear-gradient(135deg,var(--bleu) 50%,var(--accent) 50%)}
+.pastille.ouverte{transform:translate(-50%,-50%) scale(1.4);z-index:4}
+.pastille.ouverte .etiquette{opacity:1}
 .attribution{font-size:12px;color:var(--gris);margin-top:8px}
+.legende-points{font-size:13px;color:var(--gris);margin:10px 0 0;display:flex;
+                flex-wrap:wrap;gap:6px 18px;align-items:center}
+.legende-points .puce{display:inline-block;width:11px;height:11px;border-radius:50%;
+                border:2px solid #fff;box-shadow:0 1px 4px rgba(10,40,60,.35);
+                margin-right:6px;vertical-align:-1px}
+.legende-points .puce.part{background:var(--bleu)}
+.legende-points .puce.coll{background:var(--accent)}
+.legende-points .puce.mixte{background:linear-gradient(135deg,var(--bleu) 50%,var(--accent) 50%)}
+.detail-communes{margin-top:12px;font-size:14px}
+.detail-communes summary{cursor:pointer;color:var(--bleu);font-weight:600}
+.detail-communes ul{list-style:none;margin:12px 0 0;padding:0;display:grid;
+                grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:5px 18px}
+.detail-communes li{color:var(--texte);font-size:13.5px;padding:2px 0;
+                border-bottom:1px dotted var(--bord)}
+.detail-communes li b{color:var(--bleu-fonce)}
+.detail-communes li span{color:var(--gris);font-size:12.5px}
+
+/* --- chiffres cles --- */
+.stats{display:flex;gap:26px;flex-wrap:wrap;margin:0 0 14px}
+.stats b{display:block;font-size:27px;line-height:1.1;color:var(--bleu-fonce)}
+.stats span{font-size:13px;color:var(--gris)}
 
 /* --- format 2 : ruban qui defile en continu --- */
 .ruban{overflow:hidden;background:#0f2a3d;padding:14px 0;position:relative}
