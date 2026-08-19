@@ -1,6 +1,6 @@
 :root{
   --bleu:#1F5C87; --bleu-fonce:#164764; --texte:#25292e; --gris:#5c6670;
-  --fond:#ffffff; --fond-doux:#f4f7f9; --bord:#dfe5ea;
+  --fond:#ffffff; --fond-doux:#f4f7f9; --bord:#dfe5ea; --accent:#f2a33c;
 }
 *{box-sizing:border-box}
 body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Calibri,Arial,sans-serif;
@@ -56,19 +56,20 @@ nav.principale a.actif{opacity:1;border-bottom-color:#fff}
   background:linear-gradient(115deg,rgba(10,32,50,.93) 0%,rgba(16,60,92,.82) 55%,rgba(16,60,92,.55) 100%)}
 .immersion .wrap{position:relative;z-index:1}
 .immersion h2{color:#fff}
-.piliers{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
-.piliers article{background:#fff;border:1px solid var(--bord);border-radius:12px;
-  padding:24px 22px 20px;transition:transform .22s ease, box-shadow .22s ease}
-.piliers article:hover{transform:translateY(-7px);box-shadow:0 14px 30px rgba(5,25,45,.35)}
-.piliers .ico{width:46px;height:46px;border-radius:11px;background:var(--fond-doux);
+.piliers{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.piliers article{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.22);
+  border-radius:14px;padding:24px 22px 20px;color:#fff;backdrop-filter:blur(6px);
+  transition:transform .22s ease, background .22s ease}
+.piliers article:hover{transform:translateY(-7px);background:rgba(255,255,255,.17)}
+.piliers .ico{width:46px;height:46px;border-radius:11px;background:rgba(255,255,255,.15);
   display:flex;align-items:center;justify-content:center;margin-bottom:14px;
-  transition:background .22s ease}
-.piliers article:hover .ico{background:linear-gradient(135deg,var(--bleu),var(--bleu-fonce))}
-.piliers .ico svg{width:26px;height:26px;stroke:var(--bleu);fill:none;stroke-width:1.8;
-  stroke-linecap:round;stroke-linejoin:round;transition:stroke .22s ease}
-.piliers article:hover .ico svg{stroke:#fff}
-.piliers h3{margin:0 0 10px;font-size:19px;color:var(--bleu-fonce)}
-.piliers p{font-size:15.5px;color:#3a4249;margin:0;line-height:1.6}
+  transition:background .22s ease, transform .22s ease}
+.piliers article:hover .ico{background:linear-gradient(135deg,var(--bleu),var(--accent));
+  transform:scale(1.1)}
+.piliers .ico svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:1.8;
+  stroke-linecap:round;stroke-linejoin:round}
+.piliers h3{margin:0 0 10px;font-size:19px;color:#fff}
+.piliers p{font-size:15px;color:#fff;opacity:.92;margin:0;line-height:1.6}
 
 /* --- portrait / un seul interlocuteur --- */
 .duo{display:grid;grid-template-columns:1fr 240px;gap:36px;align-items:center}
