@@ -48,13 +48,26 @@ nav.principale a.actif{opacity:1;border-bottom-color:#fff}
   .hero .sous{font-size:17px}
 }
 
-/* --- les trois piliers du savoir-faire --- */
+/* --- les trois piliers du savoir-faire : fond photo + cartes a icones (19/08) --- */
+.immersion{position:relative;padding:52px 0;overflow:hidden;border-bottom:1px solid var(--bord)}
+.immersion .fondphoto{position:absolute;inset:0;background:url('photos/hero.jpg') center/cover;
+  filter:blur(3px) brightness(.9);transform:scale(1.06)}
+.immersion .voile{position:absolute;inset:0;
+  background:linear-gradient(115deg,rgba(10,32,50,.93) 0%,rgba(16,60,92,.82) 55%,rgba(16,60,92,.55) 100%)}
+.immersion .wrap{position:relative;z-index:1}
+.immersion h2{color:#fff}
 .piliers{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
-.piliers article{background:#fff;border:1px solid var(--bord);border-radius:8px;padding:24px 24px 20px;
-                 border-top:3px solid var(--bleu)}
-.piliers .num{font-size:13px;letter-spacing:.14em;color:var(--gris);text-transform:uppercase;
-              display:block;margin-bottom:10px}
-.piliers h3{margin:0 0 10px;font-size:19px}
+.piliers article{background:#fff;border:1px solid var(--bord);border-radius:12px;
+  padding:24px 22px 20px;transition:transform .22s ease, box-shadow .22s ease}
+.piliers article:hover{transform:translateY(-7px);box-shadow:0 14px 30px rgba(5,25,45,.35)}
+.piliers .ico{width:46px;height:46px;border-radius:11px;background:var(--fond-doux);
+  display:flex;align-items:center;justify-content:center;margin-bottom:14px;
+  transition:background .22s ease}
+.piliers article:hover .ico{background:linear-gradient(135deg,var(--bleu),var(--bleu-fonce))}
+.piliers .ico svg{width:26px;height:26px;stroke:var(--bleu);fill:none;stroke-width:1.8;
+  stroke-linecap:round;stroke-linejoin:round;transition:stroke .22s ease}
+.piliers article:hover .ico svg{stroke:#fff}
+.piliers h3{margin:0 0 10px;font-size:19px;color:var(--bleu-fonce)}
 .piliers p{font-size:15.5px;color:#3a4249;margin:0;line-height:1.6}
 
 /* --- portrait / un seul interlocuteur --- */
@@ -70,11 +83,21 @@ h3{font-size:18px;color:var(--bleu-fonce);margin:26px 0 10px}
 p{margin:0 0 16px}
 
 ul.produits{list-style:none;padding:0;margin:0;display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
-ul.produits li{background:var(--fond-doux);border:1px solid var(--bord);border-radius:6px;
-               padding:16px 18px}
-ul.produits b{display:block;color:var(--bleu-fonce);margin-bottom:3px}
-ul.produits span{font-size:15px;color:var(--gris)}
+            grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+ul.produits li{position:relative;background:#fff;border:1px solid var(--bord);border-radius:12px;
+               padding:18px 18px 16px 64px;
+               transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease}
+ul.produits li:hover{transform:translateY(-5px);box-shadow:0 12px 26px rgba(20,50,75,.14);
+               border-color:var(--bleu)}
+ul.produits .ico{position:absolute;left:14px;top:16px;width:38px;height:38px;border-radius:10px;
+               background:var(--fond-doux);display:flex;align-items:center;justify-content:center;
+               transition:background .22s ease}
+ul.produits li:hover .ico{background:linear-gradient(135deg,var(--bleu),var(--bleu-fonce))}
+ul.produits .ico svg{width:22px;height:22px;stroke:var(--bleu);fill:none;stroke-width:1.8;
+               stroke-linecap:round;stroke-linejoin:round;transition:stroke .22s ease}
+ul.produits li:hover .ico svg{stroke:#fff}
+ul.produits b{display:block;color:var(--bleu-fonce);margin-bottom:3px;font-size:16.5px}
+ul.produits span{font-size:14.5px;color:var(--gris);line-height:1.5;display:block}
 
 ol.etapes{margin:0;padding-left:22px}
 ol.etapes li{margin-bottom:12px}
