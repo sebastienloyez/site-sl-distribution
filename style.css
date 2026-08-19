@@ -94,11 +94,10 @@ nav.principale a.devis:hover{transform:translateY(-2px);letter-spacing:normal;
 
 /* --- portrait / un seul interlocuteur --- */
 .interlocuteur{position:relative;overflow:hidden;background:var(--fond-doux)}
-.interlocuteur .fondportrait{position:absolute;inset:-50px;
-  background:url('photos/portrait.png') center 24%/contain no-repeat;
-  filter:blur(52px) saturate(.8);opacity:0;transform:scale(1.6);
-  transition:opacity 1.6s ease,filter 1.6s ease}
-.interlocuteur.dedans .fondportrait{opacity:.13;filter:blur(30px) saturate(.8)}
+.interlocuteur .fondportrait{position:absolute;inset:0;
+  background:url('photos/portrait-flou.jpg') center/cover no-repeat;
+  opacity:0;transition:opacity 1.6s ease}
+.interlocuteur.dedans .fondportrait{opacity:.45}
 .interlocuteur .wrap{position:relative;z-index:1}
 .duo{display:grid;grid-template-columns:1fr 240px;gap:36px;align-items:center}
 .duo .portrait{justify-self:center}
