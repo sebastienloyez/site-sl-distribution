@@ -149,9 +149,13 @@ formulaire de devis servent uniquement &agrave; vous recontacter
         });
       if(!cible) return;
       var titre = cible.querySelector('h2, h1');
-      var bord = (titre || cible).getBoundingClientRect();
+      var droite = (titre || cible).getBoundingClientRect().right;
+      Array.prototype.forEach.call(cible.querySelectorAll('img'), function(im){
+        var r = im.getBoundingClientRect();
+        if(r.top - 8 <= tipY && r.bottom + 8 >= tipY) droite = Math.max(droite, r.right);
+      });
       cote.style.top = (tipY + 5) + 'px';
-      cote.style.width = Math.max(40, doc.clientWidth - 46 - bord.right - 10) + 'px';
+      cote.style.width = Math.max(40, doc.clientWidth - 46 - droite - 14) + 'px';
       cote.style.opacity = 1;
       if(titre) mesure.textContent = texteMesure + ' · ' + titre.textContent.trim();
     };
