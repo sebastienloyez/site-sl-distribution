@@ -267,42 +267,49 @@ ol.etapes b{color:var(--bleu-fonce)}
        reflet de verre qui balaie (5,2 -> 6,8 s), effacement (7 -> 7,8 s).
        Motifs repris des modeles PRESSGLASS, redessines en traits fins. --- */
 svg.vitrage{position:absolute;inset:0;width:100%;height:100%;z-index:0;
-            animation:cycle-voile 20s linear infinite}
-.cadres path{stroke-dasharray:1;stroke-dashoffset:1;animation:cadre-trait 20s linear infinite}
-.cadres path:nth-of-type(1){animation-delay:0s}
-.cadres path:nth-of-type(2){animation-delay:.25s}
-.cadres path:nth-of-type(3){animation-delay:.5s}
-.cadres path:nth-of-type(4){animation-delay:.75s}
-.cadres path:nth-of-type(5){animation-delay:1s}
-.cadres path:nth-of-type(6){animation-delay:1.25s}
-.cadres path:nth-of-type(7){animation-delay:1.5s}
-@keyframes cadre-trait{0%{stroke-dashoffset:1}1.25%{stroke-dashoffset:0}
+            animation:cycle-voile 30s linear infinite}
+.cadres .trait{stroke-dasharray:1;stroke-dashoffset:1;animation:cadre-trait 30s linear infinite}
+.cadres .pointe{stroke:#fff;stroke-opacity:1;stroke-width:2.2;stroke-linecap:round;
+                stroke-dasharray:.004 .996;stroke-dashoffset:1.004;
+                animation:cadre-pointe 30s linear infinite}
+.cadres g:nth-of-type(1) path{animation-delay:0s}
+.cadres g:nth-of-type(2) path{animation-delay:3s}
+.cadres g:nth-of-type(3) path{animation-delay:6s}
+.cadres g:nth-of-type(4) path{animation-delay:9s}
+.cadres g:nth-of-type(5) path{animation-delay:12s}
+.cadres g:nth-of-type(6) path{animation-delay:15s}
+.cadres g:nth-of-type(7) path{animation-delay:18s}
+.cadres g:nth-of-type(8) path{animation-delay:21s}
+@keyframes cadre-trait{0%{stroke-dashoffset:1}3.33%{stroke-dashoffset:0}
   100%{stroke-dashoffset:0}}
+@keyframes cadre-pointe{0%{stroke-dashoffset:1.004;opacity:1}
+  3.33%{stroke-dashoffset:.004;opacity:1}3.8%{opacity:0}
+  100%{stroke-dashoffset:.004;opacity:0}}
 .reflet{position:absolute;inset:0;z-index:1;pointer-events:none;
         background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.13) 50%,transparent 58%);
         background-size:50% 100%;background-repeat:no-repeat;background-position:-60% 0;
-        animation:cycle-reflet 20s ease-in-out infinite}
-.trace .trait{stroke-dasharray:1;stroke-dashoffset:1;animation:cycle-trait 20s linear infinite}
+        animation:cycle-reflet 30s ease-in-out infinite}
+.trace .trait{stroke-dasharray:1;stroke-dashoffset:1;animation:cycle-trait 30s linear infinite}
 .trace .pointe{stroke:#fff;stroke-opacity:1;stroke-width:2.2;stroke-linecap:round;
                stroke-dasharray:.004 .996;stroke-dashoffset:1.004;
-               animation:cycle-pointe 20s linear infinite}
-.trace g:nth-of-type(1) path{animation-delay:2.5s}
+               animation:cycle-pointe 30s linear infinite}
+.trace g:nth-of-type(1) path{animation-delay:1s}
 .trace g:nth-of-type(2) path{animation-delay:4s}
-.trace g:nth-of-type(3) path{animation-delay:5.5s}
-.trace g:nth-of-type(4) path{animation-delay:7s}
-.trace g:nth-of-type(5) path{animation-delay:8.5s}
-.trace g:nth-of-type(6) path{animation-delay:10s}
-.trace g:nth-of-type(7) path{animation-delay:11.5s}
-.trace g:nth-of-type(8) path{animation-delay:13s}
-@keyframes cycle-trait{0%{stroke-dashoffset:1}7.5%{stroke-dashoffset:0}
+.trace g:nth-of-type(3) path{animation-delay:7s}
+.trace g:nth-of-type(4) path{animation-delay:10s}
+.trace g:nth-of-type(5) path{animation-delay:13s}
+.trace g:nth-of-type(6) path{animation-delay:16s}
+.trace g:nth-of-type(7) path{animation-delay:19s}
+.trace g:nth-of-type(8) path{animation-delay:22s}
+@keyframes cycle-trait{0%{stroke-dashoffset:1}6.67%{stroke-dashoffset:0}
   100%{stroke-dashoffset:0}}
 @keyframes cycle-pointe{0%{stroke-dashoffset:1.004;opacity:1}
-  7.5%{stroke-dashoffset:.004;opacity:1}8%{opacity:0}
+  6.67%{stroke-dashoffset:.004;opacity:1}7.1%{opacity:0}
   100%{stroke-dashoffset:.004;opacity:0}}
-@keyframes cycle-voile{0%,92.5%{opacity:1}97.5%{opacity:0}
+@keyframes cycle-voile{0%,93%{opacity:1}97%{opacity:0}
   99.9%{opacity:0}100%{opacity:1}}
-@keyframes cycle-reflet{0%,77.5%{background-position:-60% 0}
-  90%{background-position:160% 0}100%{background-position:160% 0}}
+@keyframes cycle-reflet{0%,83%{background-position:-60% 0}
+  92%{background-position:160% 0}100%{background-position:160% 0}}
 @media (prefers-reduced-motion:reduce){
   .trace .trait{animation:none;stroke-dashoffset:0}
   .trace .pointe{animation:none;opacity:0}
@@ -316,6 +323,26 @@ svg.vitrage{position:absolute;inset:0;width:100%;height:100%;z-index:0;
 .apparait{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
 .apparait.visible{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.apparait{opacity:1;transform:none;transition:none}}
+
+/* --- le metre de chantier (blanc) qui se deroule a droite au defilement,
+       avec sa mesure : toute la page = 2,00 m. Idee de Sebastien du 19/08. --- */
+#metre{position:fixed;top:0;right:14px;width:30px;height:0;overflow:hidden;z-index:50;
+       box-shadow:0 2px 8px rgba(0,0,0,.25);border-radius:0 0 3px 3px;pointer-events:none}
+#metre .regle{position:absolute;top:0;left:0;width:100%;border-left:1px solid #c9cdd1;
+  background:linear-gradient(90deg,#eef0f2 0%,#ffffff 30%,#f2f4f5 100%)}
+#metre .regle::before{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(180deg,#222 0 1px,transparent 1px 8px)}
+#metre .regle::after{content:"";position:absolute;top:0;left:0;width:12px;height:100%;
+  background:repeating-linear-gradient(180deg,transparent 0 39px,#222 39px 40px)}
+#metre .num{position:absolute;right:3px;font:700 9px/1 "Segoe UI",sans-serif;color:#222}
+#embout{position:fixed;right:12px;width:34px;height:12px;z-index:51;pointer-events:none;
+  background:linear-gradient(180deg,#d8d8d8,#8f8f8f);border:1px solid #6f6f6f;
+  border-radius:0 0 3px 3px;box-shadow:0 2px 5px rgba(0,0,0,.3)}
+#mesure{position:fixed;right:50px;padding:3px 8px;z-index:51;pointer-events:none;
+  background:#16324a;color:#fff;font:600 12px/1.2 "Segoe UI",sans-serif;border-radius:5px;
+  opacity:0;transition:opacity .3s ease}
+@media (max-width:760px){#metre,#embout,#mesure{display:none}}
+@media (prefers-reduced-motion:reduce){#metre,#embout,#mesure{display:none}}
 
 /* --- format 2 : ruban qui defile en continu --- */
 .ruban{overflow:hidden;background:#0f2a3d;padding:14px 0;position:relative}
