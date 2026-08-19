@@ -261,6 +261,12 @@ ol.etapes b{color:var(--bleu-fonce)}
 
 .retour{display:inline-block;margin-top:30px;font-size:15px}
 
+/* --- accueil : carte des chantiers a cote de "Ce que je realise" --- */
+.duo-carte{display:grid;grid-template-columns:minmax(300px,5fr) 6fr;gap:28px;align-items:start}
+.duo-carte ul.produits{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.legende-carte{font-size:13.5px;color:var(--gris);margin:8px 0 0;line-height:1.5}
+@media (max-width:760px){.duo-carte{grid-template-columns:1fr}}
+
 /* --- curseur comparateur avant/apres --- */
 .comparateur{position:relative;border-radius:8px;overflow:hidden;margin:8px 0 30px;
   --pos:50%;border:1px solid var(--bord)}
