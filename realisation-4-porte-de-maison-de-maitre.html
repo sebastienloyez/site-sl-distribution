@@ -21,9 +21,23 @@
 <section><div class="wrap article">
 <ul class="fiche"><li><b>Chantier</b> &mdash; Bâti ancien, porte d'entrée aluminium sur mesure</li><li><b>Ann&eacute;e</b> &mdash; 2026</li></ul>
 <p>La porte d'origine était en métal, très lourde, avec une ferronnerie que plus grand monde ne sait produire aujourd'hui. C'était aussi une passoire : l'air passait par-dessous et l'isolation était inexistante.</p><p>À la place, une porte d'entrée aluminium sur mesure, cintrée, trois mètres de haut, laquée noir structuré, vitrage feuilleté satiné, seuil aluminium, et des croisillons dans l'imposte et dans l'ouvrant pour rester dans l'esprit de la façade.</p><p>Il y avait aussi une raison très concrète : le passage. L'ancienne porte avait deux vantaux strictement identiques, avec un montant pile au milieu — pour rentrer un meuble, c'est la galère. La nouvelle est dissymétrique, deux tiers un tiers : un large ouvrant d'un côté, un fixe étroit de l'autre. Même tableau, même maçonnerie, et pourtant on passe.</p><p>Sur l'esthétique, je ne prétendrai pas qu'on fasse aussi bien que les artisans qui ont construit ces maisons. Sur l'étanchéité à l'air, le confort et la sécurité, en revanche, la comparaison est sans appel. C'est la ligne que je m'impose sur le bâti ancien : ne pas trahir la façade, et apporter ce que l'époque permet.</p>
+
+<h3>Avant / apr&egrave;s &mdash; faites glisser le curseur</h3>
+<div class="comparateur">
+<img src="photos/4-porte-de-maison-de-maitre-curseur-apres.jpg" alt="Apr&egrave;s les travaux">
+<img class="avant" src="photos/4-porte-de-maison-de-maitre-curseur-avant.jpg" alt="Avant les travaux">
+<div class="barre"></div>
+<input type="range" min="0" max="100" value="50" aria-label="Comparer avant et apr&egrave;s les travaux">
+</div>
 <div class="galerie"><div class="cadre"><img src="photos/4-porte-de-maison-de-maitre-01.jpg" alt="Une porte d'entrée pour une maison de maître" loading="lazy"></div><div class="cadre"><img src="photos/4-porte-de-maison-de-maitre-02.jpg" alt="Une porte d'entrée pour une maison de maître" loading="lazy"></div><div class="cadre"><img src="photos/4-porte-de-maison-de-maitre-03.jpg" alt="Une porte d'entrée pour une maison de maître" loading="lazy"></div></div>
 <a class="retour" href="realisations.html">&larr; Toutes les r&eacute;alisations</a>
-</div></section>
+</div></section><script>
+document.querySelectorAll(".comparateur input[type=range]").forEach(function (r) {
+  r.addEventListener("input", function () {
+    r.parentElement.style.setProperty("--pos", r.value + "%");
+  });
+});
+</script>
 <footer><div class="wrap">
 <p class="liens"><a href="index.html">Accueil</a><a href="realisations.html">R&eacute;alisations</a><a href="conseils.html">Conseils</a><a href="contact.html">Contact</a><a href="mentions-legales.html">Mentions l&eacute;gales</a><a href="https://www.linkedin.com/in/sebastien-loyez" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.facebook.com/loyezsebastien" target="_blank" rel="noopener">Facebook</a></p>
 <p><b>SL DISTRIBUTION</b> &mdash; S&eacute;bastien Loyez, agent commercial en menuiseries ext&eacute;rieures pour Fourtech+.<br>
