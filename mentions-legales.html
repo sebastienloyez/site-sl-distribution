@@ -99,6 +99,7 @@ formulaire de devis servent uniquement &agrave; vous recontacter
 <div id="metre" aria-hidden="true"><div class="regle"></div></div>
 <div id="embout" aria-hidden="true"></div>
 <div id="mesure" aria-hidden="true">0,00 m</div>
+<div id="cote" aria-hidden="true"></div>
 <script>
 (function(){
   var metre = document.getElementById('metre');
@@ -119,6 +120,9 @@ formulaire de devis servent uniquement &agrave; vous recontacter
         regle.appendChild(n);
       }
     };
+    var cote = document.getElementById('cote');
+    var texteMesure = '0,00 m';
+    var minuteur = null;
     var maj = function(){
       var max = doc.scrollHeight - doc.clientHeight || 1;
       var p = Math.min(1, doc.scrollTop / max);
@@ -126,14 +130,44 @@ formulaire de devis servent uniquement &agrave; vous recontacter
       metre.style.height = h + 'px';
       embout.style.top = h + 'px';
       mesure.style.top = Math.max(4, h - 10) + 'px';
-      mesure.textContent = (p * 2).toFixed(2).replace('.', ',') + ' m';
+      texteMesure = (p * 2).toFixed(2).replace('.', ',') + ' m';
+      mesure.textContent = texteMesure;
       mesure.style.opacity = p > 0.02 ? 1 : 0;
     };
-    construire(); maj();
-    addEventListener('scroll', maj, {passive:true});
+    /* pause du defilement : le metre s'affirme et un trait de cote part
+       de la pointe vers la section en cours, avec son nom (idee du 19/08) */
+    var pause = function(){
+      var h = parseFloat(metre.style.height) || 0;
+      if(h < 30) return;
+      metre.classList.add('actif');
+      var tipY = h;
+      var cible = null;
+      Array.prototype.forEach.call(
+        document.querySelectorAll('section, div.immersion'), function(s){
+          var r = s.getBoundingClientRect();
+          if(!cible && r.top <= tipY && r.bottom >= tipY) cible = s;
+        });
+      if(!cible) return;
+      var titre = cible.querySelector('h2, h1');
+      var bord = (titre || cible).getBoundingClientRect();
+      cote.style.top = (tipY + 5) + 'px';
+      cote.style.width = Math.max(40, doc.clientWidth - 46 - bord.right - 10) + 'px';
+      cote.style.opacity = 1;
+      if(titre) mesure.textContent = texteMesure + ' · ' + titre.textContent.trim();
+    };
+    var defile = function(){
+      maj();
+      metre.classList.remove('actif');
+      cote.style.opacity = 0;
+      cote.style.width = '0px';
+      if(minuteur) clearTimeout(minuteur);
+      minuteur = setTimeout(pause, 600);
+    };
+    construire(); maj(); minuteur = setTimeout(pause, 1200);
+    addEventListener('scroll', defile, {passive:true});
     addEventListener('resize', function(){ construire(); maj(); }, {passive:true});
   }
-  var cibles = document.querySelectorAll('.piliers article, .grille .carte');
+  var cibles = document.querySelectorAll('.piliers article, .grille .carte, .pelemele, .duo > div');
   if(!('IntersectionObserver' in window) || !cibles.length) return;
   cibles.forEach(function(el, i){
     el.classList.add('apparait');

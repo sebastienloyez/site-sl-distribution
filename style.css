@@ -316,8 +316,15 @@ svg.vitrage{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 
 /* --- le metre de chantier (blanc) qui se deroule a droite au defilement,
        avec sa mesure : toute la page = 2,00 m. Idee de Sebastien du 19/08. --- */
+html{scroll-snap-type:y proximity;scroll-padding-top:10px}
+section,div.immersion{scroll-snap-align:start}
 #metre{position:fixed;top:0;right:14px;width:30px;height:0;overflow:hidden;z-index:50;
-       box-shadow:0 2px 8px rgba(0,0,0,.25);border-radius:0 0 3px 3px;pointer-events:none}
+       box-shadow:0 2px 8px rgba(0,0,0,.25);border-radius:0 0 3px 3px;pointer-events:none;
+       opacity:.55;transition:opacity .3s ease}
+#metre.actif{opacity:1}
+#cote{position:fixed;right:46px;width:0;height:0;border-top:2px dashed var(--accent);
+      z-index:49;pointer-events:none;opacity:0;
+      transition:width .55s ease,opacity .3s ease}
 #metre .regle{position:absolute;top:0;left:0;width:100%;border-left:1px solid #c9cdd1;
   background:linear-gradient(90deg,#eef0f2 0%,#ffffff 30%,#f2f4f5 100%)}
 #metre .regle::before{content:"";position:absolute;inset:0;
@@ -331,8 +338,8 @@ svg.vitrage{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 #mesure{position:fixed;right:50px;padding:3px 8px;z-index:51;pointer-events:none;
   background:#16324a;color:#fff;font:600 12px/1.2 "Segoe UI",sans-serif;border-radius:5px;
   opacity:0;transition:opacity .3s ease}
-@media (max-width:760px){#metre,#embout,#mesure{display:none}}
-@media (prefers-reduced-motion:reduce){#metre,#embout,#mesure{display:none}}
+@media (max-width:760px){#metre,#embout,#mesure,#cote{display:none}}
+@media (prefers-reduced-motion:reduce){#metre,#embout,#mesure,#cote{display:none}}
 
 /* --- format 2 : ruban qui defile en continu --- */
 .ruban{overflow:hidden;background:#0f2a3d;padding:14px 0;position:relative}
