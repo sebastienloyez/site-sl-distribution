@@ -83,6 +83,8 @@ document.querySelectorAll(".cadre[data-photos]").forEach(function (cadre) {
   var photos = cadre.getAttribute("data-photos").split("|");
   var img = cadre.querySelector("img");
   var points = cadre.querySelectorAll(".points span");
+  // le pele-mele de l'accueil defile plus vite (demande du 19/08)
+  var cadence = cadre.closest(".pelemele") ? 900 : 1500;
   var i = 0, minuteur = null;
   function montre(n) {
     i = (n + photos.length) % photos.length;
@@ -96,7 +98,7 @@ document.querySelectorAll(".cadre[data-photos]").forEach(function (cadre) {
   });
   cadre.addEventListener("mouseenter", function () {
     if (minuteur) return;
-    minuteur = setInterval(function () { montre(i + 1); }, 1500);
+    minuteur = setInterval(function () { montre(i + 1); }, cadence);
   });
   cadre.addEventListener("mouseleave", function () {
     clearInterval(minuteur); minuteur = null;
