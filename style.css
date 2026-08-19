@@ -150,7 +150,13 @@ ol.etapes b{color:var(--bleu-fonce)}
 .carte img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--fond-doux);
            transition:transform .45s ease}
 .carte a:hover img{transform:scale(1.06)}
-.carte .cadre{overflow:hidden}
+.carte .cadre{overflow:hidden;position:relative}
+.carte .points{position:absolute;left:0;right:0;bottom:8px;display:flex;
+  justify-content:center;gap:6px;z-index:2}
+.carte .points span{width:9px;height:9px;border-radius:50%;cursor:pointer;
+  background:rgba(255,255,255,.55);border:1px solid rgba(0,0,0,.2);
+  box-shadow:0 1px 3px rgba(0,0,0,.3);transition:background .2s ease, transform .2s ease}
+.carte .points span.actif{background:#fff;transform:scale(1.3)}
 .carte .txt{padding:14px 16px 16px}
 .carte .lieu{font-size:13px;text-transform:uppercase;letter-spacing:.07em;color:var(--gris);
              margin-bottom:5px}
