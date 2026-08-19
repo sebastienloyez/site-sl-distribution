@@ -96,7 +96,9 @@ nav.principale a.devis:hover{transform:translateY(-2px);letter-spacing:normal;
 .interlocuteur{position:relative;overflow:hidden;background:var(--fond-doux)}
 .interlocuteur .fondportrait{position:absolute;inset:-50px;
   background:url('photos/portrait.png') center 24%/contain no-repeat;
-  filter:blur(32px) saturate(.8);opacity:.13;transform:scale(1.6)}
+  filter:blur(52px) saturate(.8);opacity:0;transform:scale(1.6);
+  transition:opacity 1.6s ease,filter 1.6s ease}
+.interlocuteur.dedans .fondportrait{opacity:.13;filter:blur(30px) saturate(.8)}
 .interlocuteur .wrap{position:relative;z-index:1}
 .duo{display:grid;grid-template-columns:1fr 240px;gap:36px;align-items:center}
 .duo .portrait{justify-self:center}
@@ -273,7 +275,7 @@ ol.etapes b{color:var(--bleu-fonce)}
        Motifs repris des modeles PRESSGLASS, redessines en traits fins. --- */
 svg.vitrage{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 .cadres .trait{stroke-dasharray:1;stroke-dashoffset:1;animation:trace-un 1s linear forwards}
-.cadres .pointe{stroke:#fff;stroke-opacity:1;stroke-width:2.2;stroke-linecap:round;
+.cadres .pointe{stroke:#ffd98f;stroke-opacity:1;stroke-width:2.2;stroke-linecap:round;
                 stroke-dasharray:.004 .996;stroke-dashoffset:1.004;opacity:0;
                 animation:pointe-un 1s linear forwards}
 .cadres g:nth-of-type(1) path{animation-delay:.4s}
@@ -289,7 +291,7 @@ svg.vitrage{position:absolute;inset:0;width:100%;height:100%;z-index:0}
         background-size:50% 100%;background-repeat:no-repeat;background-position:-60% 0;
         animation:cycle-reflet 14s ease-in-out 25s infinite}
 .trace .trait{stroke-dasharray:1;stroke-dashoffset:1;animation:trace-un 2s linear forwards}
-.trace .pointe{stroke:#fff;stroke-opacity:1;stroke-width:2.2;stroke-linecap:round;
+.trace .pointe{stroke:#ffd98f;stroke-opacity:1;stroke-width:2.2;stroke-linecap:round;
                stroke-dasharray:.004 .996;stroke-dashoffset:1.004;opacity:0;
                animation:pointe-un 2s linear forwards}
 .trace g:nth-of-type(1) path{animation-delay:1.4s}
