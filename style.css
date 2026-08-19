@@ -352,8 +352,13 @@ section,div.immersion{scroll-snap-align:start}
   #metre .regle::after{width:8px}
   #metre .num{display:none}
   #embout{width:20px;right:4px;height:9px}
-  #mesure{right:30px;font-size:11px;padding:2px 6px}
-  #cote{right:28px}
+  #mesure{right:32px;font-size:11px;padding:3px 7px}
+  /* la fleche doree est accrochee a l'etiquette : lisible sur tous les fonds */
+  #mesure::before{content:"";position:absolute;left:-13px;top:50%;margin-top:-5px;
+    border-top:5px solid transparent;border-bottom:5px solid transparent;
+    border-right:10px solid var(--accent)}
+  /* la longue ligne de cote se perd dans le texte sur petit ecran */
+  #cote{display:none}
 }
 @media (prefers-reduced-motion:reduce){#metre,#embout,#mesure,#cote{display:none}}
 
