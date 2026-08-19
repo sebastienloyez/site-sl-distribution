@@ -116,6 +116,12 @@ ol.etapes b{color:var(--bleu-fonce)}
 .pelemele .legende{position:absolute;left:0;right:0;bottom:0;padding:26px 10px 7px;
   background:linear-gradient(180deg,rgba(10,30,46,0),rgba(10,30,46,.74));
   color:#fff;font-size:12px;font-weight:600;line-height:1.3}
+.pelemele .points{position:absolute;top:7px;left:0;right:0;display:flex;
+  justify-content:center;gap:5px;z-index:2}
+.pelemele .points span{width:7px;height:7px;border-radius:50%;cursor:pointer;
+  background:rgba(255,255,255,.55);border:1px solid rgba(0,0,0,.2);
+  box-shadow:0 1px 3px rgba(0,0,0,.3);transition:background .2s ease, transform .2s ease}
+.pelemele .points span.actif{background:#fff;transform:scale(1.3)}
 .pelemele .t1{width:150px}.pelemele .t1 img{aspect-ratio:4/3.4}
 .pelemele .t2{width:205px}.pelemele .t2 img{aspect-ratio:4/3.2}
 .pelemele .t3{width:270px}.pelemele .t3 img{aspect-ratio:4/3}
