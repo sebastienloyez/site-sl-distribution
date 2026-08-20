@@ -35,12 +35,38 @@ vous achetez. Sans engagement, et sans insistance&nbsp;: si ce n&rsquo;est pas l
 n&rsquo;est pas le moment.</p>
 
 <h2 id="devis" style="margin-top:38px">Demande de devis en ligne</h2>
-<p>D&eacute;crivez votre projet en deux lignes, je vous rappelle rapidement.</p>
+<p>Trois petites questions pour que je vous rappelle en connaissant d&eacute;j&agrave;
+votre projet &mdash; puis vos coordonn&eacute;es, et c&rsquo;est parti.</p>
+<div class="guide" id="guide">
+<p class="etape">1. Votre projet</p>
+<div class="choix" data-q="Projet">
+<button type="button">R&eacute;novation</button>
+<button type="button">Construction neuve</button>
+<button type="button">Commerce ou collectivit&eacute;</button>
+</div>
+<p class="etape">2. Vos menuiseries <small>(plusieurs choix possibles)</small></p>
+<div class="choix multi" data-q="Menuiseries">
+<button type="button">Fen&ecirc;tres</button>
+<button type="button">Porte d&rsquo;entr&eacute;e</button>
+<button type="button">Volets roulants</button>
+<button type="button">Porte de garage</button>
+<button type="button">Vitrine / mur rideau</button>
+<button type="button">Autre</button>
+</div>
+<p class="etape">3. Votre horizon</p>
+<div class="choix" data-q="D&eacute;lai">
+<button type="button">D&egrave;s que possible</button>
+<button type="button">Dans 3 &agrave; 6 mois</button>
+<button type="button">Je me renseigne</button>
+</div>
+<p class="recap" id="recap"></p>
+</div>
 <form class="fdevis" action="https://formsubmit.co/543e697592c0c8025c569782ab9a827d" method="POST">
 <input type="hidden" name="_subject" value="Demande de devis via sl-distribution.fr">
 <input type="hidden" name="_next" value="https://www.sl-distribution.fr/merci.html">
 <input type="hidden" name="_captcha" value="false">
 <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+<input type="hidden" name="votre_projet_en_bref" id="parcours" value="">
 <div class="deux">
 <label>Votre nom<input type="text" name="nom" required></label>
 <label>T&eacute;l&eacute;phone<input type="tel" name="telephone" required></label>
@@ -55,7 +81,65 @@ placeholder="Par exemple : remplacer 6 fen&ecirc;tres et 2 volets roulants sur u
 <p class="note">Vos coordonn&eacute;es servent uniquement &agrave; vous recontacter au sujet
 de votre projet. Jamais partag&eacute;es, jamais de publicit&eacute;.</p>
 </form>
-</div></section>
+
+<div class="faq">
+<h2>Questions fr&eacute;quentes</h2>
+<details><summary>Combien de temps entre la commande et la pose&nbsp;?</summary>
+<p>Comptez en g&eacute;n&eacute;ral 6 &agrave; 8 semaines de fabrication selon le
+mat&eacute;riau et la teinte, puis la pose est cal&eacute;e avec vous. Le d&eacute;lai
+pr&eacute;cis est annonc&eacute; d&egrave;s la commande, et je vous tiens inform&eacute;
+pendant la fabrication.</p></details>
+<details><summary>O&ugrave; intervenez-vous&nbsp;?</summary>
+<p>Cambrai et tout le Cambr&eacute;sis d&rsquo;abord &mdash; et plus largement les
+Hauts-de-France&nbsp;: la <a href="index.html#carte">carte des chantiers</a> compte
+d&eacute;j&agrave; plus de cent communes, du Douaisis &agrave; Saint-Quentin.</p></details>
+<details><summary>Qui pose les menuiseries&nbsp;?</summary>
+<p>Les &eacute;quipes du fabricant Fourtech+, &agrave; Niergnies. Moi, je suis votre
+interlocuteur du premier coup de m&egrave;tre &agrave; la r&eacute;ception&nbsp;: conseil,
+cotes, dossier, suivi du chantier.</p></details>
+<details><summary>Comment se passe le paiement&nbsp;?</summary>
+<p>Un acompte &agrave; la commande &mdash; le montant exact est pr&eacute;cis&eacute; sur
+le devis &mdash; puis le solde &agrave; la r&eacute;ception, une fois le chantier
+contr&ocirc;l&eacute; ensemble.</p></details>
+<details><summary>Travaillez-vous en site occup&eacute;&nbsp;?</summary>
+<p>Oui&nbsp;: &eacute;coles pendant les vacances scolaires, commerces qui restent ouverts,
+maisons habit&eacute;es. &Ccedil;a s&rsquo;organise, et c&rsquo;est justement mon
+travail&nbsp;: les <a href="realisations.html">r&eacute;alisations</a> en t&eacute;moignent.</p></details>
+</div>
+</div></section><script>
+(function(){
+  var recap = document.getElementById('recap');
+  var champ = document.getElementById('parcours');
+  var zone = document.querySelector('.fdevis textarea');
+  var etat = {};
+  function maj(){
+    var morceaux = [];
+    for (var q in etat){ if (etat[q].length) morceaux.push(q + ' : ' + etat[q].join(', ')); }
+    var texte = morceaux.join('  ·  ');
+    champ.value = texte;
+    recap.innerHTML = texte ? 'Votre demande&nbsp;: <b>' + texte + '</b>' : '';
+  }
+  document.querySelectorAll('.choix').forEach(function(bloc){
+    var q = bloc.getAttribute('data-q');
+    var multi = bloc.classList.contains('multi');
+    etat[q] = [];
+    bloc.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click', function(){
+        if (multi){
+          b.classList.toggle('actif');
+        } else {
+          bloc.querySelectorAll('button').forEach(function(x){ x.classList.remove('actif'); });
+          b.classList.add('actif');
+        }
+        etat[q] = Array.prototype.filter.call(bloc.querySelectorAll('button'),
+          function(x){ return x.classList.contains('actif'); })
+          .map(function(x){ return x.textContent.trim(); });
+        maj();
+      });
+    });
+  });
+})();
+</script>
 <footer><div class="wrap">
 <p class="liens"><a href="index.html">Accueil</a><a href="realisations.html">R&eacute;alisations</a><a href="conseils.html">Conseils</a><a href="contact.html">Contact</a><a href="mentions-legales.html">Mentions l&eacute;gales</a><a href="https://www.linkedin.com/in/sebastien-loyez" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.facebook.com/loyezsebastien" target="_blank" rel="noopener">Facebook</a></p>
 <p><b>SL DISTRIBUTION</b> &mdash; S&eacute;bastien Loyez, agent commercial en menuiseries ext&eacute;rieures pour Fourtech+.<br>

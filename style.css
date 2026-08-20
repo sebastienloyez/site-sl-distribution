@@ -321,6 +321,26 @@ svg.vitrage{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 .produit-photos a:hover img{transform:scale(1.03)}
 .produit-liens{color:var(--gris);margin-top:18px}
 
+/* --- devis guide en 3 questions + FAQ (valide par Sebastien le 20/08) --- */
+.guide{background:var(--fond-doux);border:1px solid var(--bord);border-radius:10px;
+       padding:20px 22px 6px;margin:18px 0 26px}
+.guide .etape{font-weight:700;margin:14px 0 8px}
+.guide .etape small{font-weight:400;color:var(--gris)}
+.choix{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.choix button{font:inherit;font-size:15px;padding:8px 16px;border-radius:999px;
+       border:1px solid var(--bord);background:#fff;cursor:pointer;
+       transition:all .15s ease}
+.choix button:hover{border-color:var(--bleu)}
+.choix button.actif{background:var(--bleu);color:#fff;border-color:var(--bleu)}
+.guide .recap{margin:2px 0 16px;color:var(--gris);font-size:15px;min-height:1.4em}
+.guide .recap b{color:var(--texte)}
+.faq{margin-top:38px}
+.faq details{border:1px solid var(--bord);border-radius:8px;margin-bottom:10px;
+       background:#fff;padding:0 16px}
+.faq summary{font-weight:700;cursor:pointer;padding:13px 0;list-style-position:inside}
+.faq details[open] summary{border-bottom:1px solid var(--bord)}
+.faq details p{margin:12px 0 14px}
+
 /* --- apparition au defilement (valide par Sebastien le 19/08) :
        les cartes arrivent en fondu + petite montee, une seule fois.
        Sans JavaScript, rien ne change : la classe n'est posee que par le script. --- */
