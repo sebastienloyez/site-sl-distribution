@@ -393,13 +393,14 @@ section,div.immersion{scroll-snap-align:start}
   #metre .regle::after{width:8px}
   #metre .num{display:none}
   #embout{width:20px;right:4px;height:9px}
-  #mesure{right:32px;font-size:11px;padding:3px 7px}
-  /* la fleche doree est accrochee a l'etiquette : lisible sur tous les fonds */
-  #mesure::before{content:"";position:absolute;left:-13px;top:50%;margin-top:-5px;
-    border-top:5px solid transparent;border-bottom:5px solid transparent;
-    border-right:10px solid var(--accent)}
-  /* la longue ligne de cote se perd dans le texte sur petit ecran */
-  #cote{display:none}
+  /* Sur telephone l'etiquette etait decalee A GAUCHE du metre : elle passait
+     par-dessus le texte de la page. Elle se cale maintenant SOUS le metre,
+     alignee a droite (le JS la place deja a h+14 px). */
+  #mesure{right:4px;font-size:11px;padding:2px 7px;max-width:62vw;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #mesure::before{display:none}
+  /* il ne reste que la pointe de fleche, juste a gauche du metre */
+  #cote{display:block;right:24px;width:0;border-top:0}
 }
 @media (prefers-reduced-motion:reduce){#metre,#embout,#mesure,#cote{display:none}}
 
