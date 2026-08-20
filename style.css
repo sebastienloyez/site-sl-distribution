@@ -313,6 +313,14 @@ svg.vitrage{position:absolute;inset:0;width:100%;height:100%;z-index:0}
   .cadres .pointe{animation:none;opacity:0}
   .reflet{animation:none}}
 
+/* --- pages produits « Ce que je pose » (20/08) --- */
+.produit-photos{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+                gap:14px;margin:26px 0 8px}
+.produit-photos img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;
+                    display:block;transition:transform .3s ease}
+.produit-photos a:hover img{transform:scale(1.03)}
+.produit-liens{color:var(--gris);margin-top:18px}
+
 /* --- apparition au defilement (valide par Sebastien le 19/08) :
        les cartes arrivent en fondu + petite montee, une seule fois.
        Sans JavaScript, rien ne change : la classe n'est posee que par le script. --- */
