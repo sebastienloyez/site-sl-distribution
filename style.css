@@ -99,15 +99,19 @@ nav.principale a.devis:hover{transform:translateY(-2px);letter-spacing:normal;
   opacity:0;transition:opacity 2s ease}
 .interlocuteur.dedans .fondportrait{opacity:.45;transition:opacity 4.5s ease}
 .interlocuteur .wrap{position:relative;z-index:1}
-.duo{display:grid;grid-template-columns:190px 1fr;gap:26px 34px;align-items:start}
+.duo{display:grid;grid-template-columns:190px 1fr;gap:26px 34px;align-items:start;position:relative}
 .duo .portrait{justify-self:start;padding-top:2px}
 .duo .portrait img{max-width:150px;display:block;filter:drop-shadow(0 10px 24px rgba(20,50,75,.25))}
 .duo .contenu{grid-column:2;grid-row:1}
-.duo .chantier{grid-column:1/-1;grid-row:2;justify-self:end}
+/* photo de chantier : calee en bas a droite, son bas aligne sur la derniere etape */
+.duo .chantier{position:absolute;right:0;bottom:0}
 .duo .chantier img{max-width:190px;display:block}
+.duo .contenu ol.etapes{padding-right:210px}
 @media (max-width:700px){.duo{grid-template-columns:1fr;gap:18px}
-  .duo .contenu,.duo .chantier{grid-column:1;grid-row:auto}
-  .duo .portrait,.duo .chantier{justify-self:center}
+  .duo .contenu{grid-column:1;grid-row:auto}
+  .duo .chantier{position:static;justify-self:center}
+  .duo .contenu ol.etapes{padding-right:0}
+  .duo .portrait{justify-self:center}
   .duo .portrait img{max-width:132px}.duo .chantier img{max-width:200px}}
 
 section{padding:42px 0;border-bottom:1px solid var(--bord)}
