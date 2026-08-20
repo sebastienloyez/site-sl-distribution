@@ -127,6 +127,9 @@ ul.produits li:hover .ico svg{stroke:#fff}
 ul.produits b{display:block;color:var(--bleu-fonce);margin-bottom:3px;font-size:16.5px}
 ul.produits span{font-size:14.5px;color:var(--gris);line-height:1.5;display:block}
 
+.credo{margin:20px 0 24px;padding:15px 18px;background:#fff;border-left:3px solid var(--accent);border-radius:0 10px 10px 0;box-shadow:0 1px 3px rgba(31,92,135,.07)}
+.credo b{display:block;font-size:18px;line-height:1.35;color:var(--bleu-fonce);margin-bottom:7px}
+.credo span{color:var(--gris)}
 ol.etapes{margin:0;padding-left:22px}
 ol.etapes li{margin-bottom:12px}
 ol.etapes b{color:var(--bleu-fonce)}
