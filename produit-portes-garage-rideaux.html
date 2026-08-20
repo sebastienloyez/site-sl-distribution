@@ -68,7 +68,7 @@ prot&eacute;g&eacute;s par le droit d&rsquo;auteur, reproduction interdite sans 
 </div></footer>
 <div id="metre" aria-hidden="true"><div class="regle"></div></div>
 <div id="embout" aria-hidden="true"></div>
-<div id="mesure" aria-hidden="true">0,00 m</div>
+<div id="mesure" aria-hidden="true">0 mm</div>
 <div id="cote" aria-hidden="true"></div>
 <script>
 (function(){
@@ -100,7 +100,7 @@ prot&eacute;g&eacute;s par le droit d&rsquo;auteur, reproduction interdite sans 
       metre.style.height = h + 'px';
       embout.style.top = h + 'px';
       mesure.style.top = (doc.clientWidth <= 760 ? h + 14 : Math.max(4, h - 10)) + 'px';
-      texteMesure = (p * 2).toFixed(2).replace('.', ',') + ' m';
+      texteMesure = Math.round(p * 2000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' mm';
       mesure.textContent = texteMesure;
       mesure.style.opacity = p > 0.02 ? 1 : 0;
     };
