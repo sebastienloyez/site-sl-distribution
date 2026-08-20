@@ -99,10 +99,11 @@ nav.principale a.devis:hover{transform:translateY(-2px);letter-spacing:normal;
   opacity:0;transition:opacity 2s ease}
 .interlocuteur.dedans .fondportrait{opacity:.45;transition:opacity 4.5s ease}
 .interlocuteur .wrap{position:relative;z-index:1}
-.duo{display:grid;grid-template-columns:1fr 240px;gap:36px;align-items:center}
-.duo .portrait{justify-self:center}
-.duo .portrait img{max-width:185px;display:block;filter:drop-shadow(0 10px 24px rgba(20,50,75,.25))}
-@media (max-width:700px){.duo{grid-template-columns:1fr}.duo .portrait{order:-1}.duo .portrait img{max-width:150px}}
+.duo{display:grid;grid-template-columns:190px 1fr;gap:34px;align-items:start}
+.duo .portrait{justify-self:start;padding-top:2px}
+.duo .portrait img{max-width:150px;display:block;filter:drop-shadow(0 10px 24px rgba(20,50,75,.25))}
+@media (max-width:700px){.duo{grid-template-columns:1fr;gap:18px}
+  .duo .portrait{justify-self:center}.duo .portrait img{max-width:132px}}
 
 section{padding:42px 0;border-bottom:1px solid var(--bord)}
 section:last-of-type{border-bottom:0}
