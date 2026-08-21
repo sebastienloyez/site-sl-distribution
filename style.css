@@ -402,7 +402,13 @@ section,div.immersion{scroll-snap-align:start}
   /* il ne reste que la pointe de fleche, juste a gauche du metre */
   #cote{display:block;right:24px;width:0;border-top:0}
 }
-@media (prefers-reduced-motion:reduce){#metre,#embout,#mesure,#cote{display:none}}
+/* animations reduites (reglage Windows/iOS) : le metre RESTE VISIBLE - il ne
+   bouge que sous le doigt du visiteur, ce n'est pas une animation qui s'impose.
+   On coupe seulement les fondus et transitions (decision Sebastien du 21/08,
+   apres avoir constate sa disparition totale sur son PC perso). */
+@media (prefers-reduced-motion:reduce){
+  #metre,#mesure,#cote,#embout{transition:none}
+  #metre{opacity:1}}
 
 /* --- format 2 : ruban qui defile en continu --- */
 .ruban{overflow:hidden;background:#0f2a3d;padding:14px 0;position:relative}
