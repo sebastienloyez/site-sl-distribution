@@ -14,7 +14,7 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://sl-distribution.goatcounter.com; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://gc.zgo.at; connect-src 'self' https://sl-distribution.goatcounter.com; form-action https://formsubmit.co; base-uri 'self'; object-src 'none'">
 <meta property="og:locale" content="fr_FR">
-<link rel="stylesheet" href="style.css?v=1f87c2eb">
+<link rel="stylesheet" href="style.css?v=0d7b14b4">
 
 </head>
 <body>
@@ -71,13 +71,19 @@ prot&eacute;g&eacute;s par le droit d&rsquo;auteur, reproduction interdite sans 
     var doc = document.documentElement;
     var construire = function(){
       regle.style.height = doc.clientHeight + 'px';
+      // la regle est graduee pour que la page entiere = 2,00 m : la graduation
+      // au niveau de l'embout correspond ainsi TOUJOURS au chiffre de
+      // l'etiquette (corrige le 21/08 : avant, pas fixe de 40 px -> decalage)
+      var pas = doc.clientHeight / 20;
+      metre.style.setProperty('--pas', pas + 'px');
+      metre.style.setProperty('--pas-fin', (pas / 5) + 'px');
       Array.prototype.forEach.call(regle.querySelectorAll('.num'),
                                    function(n){ n.remove(); });
-      for(var y = 40; y < doc.clientHeight; y += 40){
+      for(var i = 1; i * pas < doc.clientHeight - 6; i++){
         var n = document.createElement('span');
         n.className = 'num';
-        n.style.top = (y - 12) + 'px';
-        n.textContent = Math.round(y / 40) * 10;
+        n.style.top = (i * pas - 12) + 'px';
+        n.textContent = i * 10;
         regle.appendChild(n);
       }
     };

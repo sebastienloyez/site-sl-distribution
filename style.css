@@ -378,9 +378,10 @@ section,div.immersion{scroll-snap-align:start}
 #metre .regle{position:absolute;top:0;left:0;width:100%;border-left:1px solid #c9cdd1;
   background:linear-gradient(90deg,#eef0f2 0%,#ffffff 30%,#f2f4f5 100%)}
 #metre .regle::before{content:"";position:absolute;inset:0;
-  background:repeating-linear-gradient(180deg,#222 0 1px,transparent 1px 8px)}
+  background:repeating-linear-gradient(180deg,#222 0 1px,transparent 1px var(--pas-fin,8px))}
 #metre .regle::after{content:"";position:absolute;top:0;left:0;width:12px;height:100%;
-  background:repeating-linear-gradient(180deg,transparent 0 39px,#222 39px 40px)}
+  background:repeating-linear-gradient(180deg,transparent 0 calc(var(--pas,40px) - 1px),
+  #222 calc(var(--pas,40px) - 1px) var(--pas,40px))}
 #metre .num{position:absolute;right:3px;font:700 9px/1 "Segoe UI",sans-serif;color:#222}
 #embout{position:fixed;right:12px;width:34px;height:12px;z-index:51;pointer-events:none;
   background:linear-gradient(180deg,#d8d8d8,#8f8f8f);border:1px solid #6f6f6f;
