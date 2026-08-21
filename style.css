@@ -114,6 +114,11 @@ nav.principale a.devis:hover{transform:translateY(-2px);letter-spacing:normal;
   .duo .portrait{justify-self:center}
   .duo .portrait img{max-width:132px}.duo .chantier img{max-width:200px}}
 
+/* lien pose sur un fond bleu sombre : blanc souligne d'or, sinon invisible */
+.lien-clair{color:#fff;font-weight:600;text-decoration:underline;
+  text-decoration-color:var(--accent);text-decoration-thickness:2px;
+  text-underline-offset:5px}
+.lien-clair:hover{color:var(--accent)}
 section{padding:42px 0;border-bottom:1px solid var(--bord)}
 section:last-of-type{border-bottom:0}
 h2{font-size:21px;color:var(--bleu-fonce);margin:0 0 18px;font-weight:700}
