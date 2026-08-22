@@ -19,36 +19,64 @@
 <style>html.intro-active,html.intro-active body{overflow:hidden}
 /* ===== ANIMATION D'OUVERTURE (fenetre au trait) - genere par animation_ouverture.py ===== */
 .intro{position:fixed;inset:0;z-index:9999;overflow:hidden;background:transparent;
-       animation:intro-fin .01s linear 3.5s forwards}
+       animation:intro-fin .01s linear 3.9s forwards}
 @keyframes intro-fin{to{visibility:hidden;pointer-events:none}}
 .intro .scene{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-              perspective:1100px;perspective-origin:50% 44%}
+              perspective:1100px;perspective-origin:50% 50%}
 
 /* LE MUR. Un seul element perce d'un trou aux dimensions exactes de la baie
    (clip-path, regle evenodd) : aucune couture possible, et surtout il porte LA MEME
    animation que le cadre. Le trou avance donc avec la baie et finit par depasser
    l'ecran : c'est ce qui donne la sensation d'entrer, et non de voir un decor
    s'effacer. Un mur immobile pendant que le cadre avance trahit tout de suite. */
-.intro .voilage{position:absolute;width:min(78vmin,860px);aspect-ratio:1000/820;
+.intro .voilage{position:absolute;width:calc(min(78vmin,860px) * 0.8182);aspect-ratio:1000/820;z-index:2;
+                will-change:transform,opacity;transform:translateZ(200px);
+                clip-path:polygon(evenodd,
+                  -400% -400%, 500% -400%, 500% 500%, -400% 500%, -400% -400%,
+                  8% 7.317%, 8% 90.244%,
+                  92% 90.244%, 92% 7.317%, 8% 7.317%);
+                animation:entrer-mur 2.05s cubic-bezier(.42,0,.78,.62) 1.85s forwards}
+@keyframes entrer-mur{0%{transform:translateZ(200px);opacity:1}
+                      80%{opacity:1}
+                      92%{opacity:0}
+                      100%{transform:translateZ(1080px);opacity:0}}
+.intro .voilage::before{content:"";position:absolute;inset:-55vmax;background:linear-gradient(180deg,#22608c 0%,#164764 55%,#0f3448 100%) center/100vw 100vh no-repeat, #164764}
+
+/* LE NU INTERIEUR DU MUR (l'ebrasement). Le nu exterieur avance plus vite que le
+   chassis : sans ce second plan, des que son trou depasse le chassis on voit le site
+   par-dessus et par-dessous AVANT d'etre entre (le dormant n'est qu'un dessin au
+   trait, il ne bouche rien). Celui-ci est solidaire du chassis : le site n'apparait
+   donc qu'au moment ou le chassis lui-meme sort du champ. */
+.intro .mur-int{position:absolute;width:min(78vmin,860px);aspect-ratio:1000/820;z-index:1;
                 will-change:transform,opacity;
                 clip-path:polygon(evenodd,
                   -400% -400%, 500% -400%, 500% 500%, -400% 500%, -400% -400%,
                   8% 7.317%, 8% 90.244%,
                   92% 90.244%, 92% 7.317%, 8% 7.317%);
-                animation:entrer 1.65s cubic-bezier(.36,0,.72,1) 1.85s forwards}
-.intro .voilage::before{content:"";position:absolute;inset:-55vmax;background:linear-gradient(180deg,#22608c 0%,#164764 55%,#0f3448 100%) center/100vw 100vh no-repeat, #164764}
+                animation:entrer-fond 2.05s cubic-bezier(.42,0,.78,.62) 1.85s forwards}
+.intro .mur-int::before{content:"";position:absolute;inset:-55vmax;background:#0a2735}
 
-.intro .bloc{position:relative;width:min(78vmin,860px);aspect-ratio:1000/820;
+.intro .bloc{position:relative;width:min(78vmin,860px);aspect-ratio:1000/820;z-index:3;
              transform-style:preserve-3d;will-change:transform,opacity;
-             animation:entrer 1.65s cubic-bezier(.36,0,.72,1) 1.85s forwards}
+             animation:entrer 2.05s cubic-bezier(.42,0,.78,.62) 1.85s forwards}
 /* translateZ et non scale : le cadre fuit vers les bords comme une vraie ouverture
    qu'on franchit, et l'agrandissement accelere tout seul en approchant */
 @keyframes entrer{0%{transform:translateZ(0);opacity:1}
-                  82%{opacity:1}
-                  100%{transform:translateZ(955px);opacity:0}}
+                  72%{opacity:1}
+                  90%{opacity:0}
+                  100%{transform:translateZ(880px);opacity:0}}
+/* le nu interieur est de la matiere : il reste opaque tant que son trou ne couvre pas
+   l'ecran, meme sur un ecran tres large */
+@keyframes entrer-fond{0%{transform:translateZ(0);opacity:1}
+                       94%{opacity:1}
+                       100%{transform:translateZ(880px);opacity:0}}
 
+/* La baie est la PENOMBRE derriere la fenetre, pas le mur : quand les battants
+   s'ouvrent on decouvre un volume sombre, et le site ne se revele qu'une fois la
+   traversee engagee. Reveler le site des l'ouverture, c'est le montrer avant d'y
+   etre entre (remarque de Sebastien). */
 .intro .baie{position:absolute;left:8%;top:7.317%;width:84%;height:82.927%;
-             background:linear-gradient(180deg,#22608c 0%,#164764 55%,#0f3448 100%) center/100vw 100vh no-repeat, #164764;animation:baie-clair .3s linear 1.59s forwards}
+             background:#0c2739;animation:baie-clair .55s ease-in 1.95s forwards}
 @keyframes baie-clair{to{opacity:0}}
 
 /* vitrage opaque : un verre translucide laissait deviner le site a travers les
@@ -70,6 +98,10 @@
 .intro .fin{stroke-width:2.8}
 .intro .leger{stroke-width:2.2;stroke:rgba(232,200,138,.42)}
 @keyframes tracer{to{stroke-dashoffset:0}}
+/* l'ombre portee sous l'appui est un symbole de dessin : elle s'efface des qu'on
+   s'elance, sinon elle defile en travers du site */
+.intro .ombre{animation:tracer 0.58s ease-out forwards, ombre-out .45s ease-out 1.85s forwards}
+@keyframes ombre-out{to{opacity:0}}
 
 .intro .mot{position:absolute;left:0;right:0;bottom:7%;margin:0;text-align:center;z-index:5;
             color:rgba(232,200,138,.9);font-size:14px;letter-spacing:.24em;text-transform:uppercase;
@@ -82,15 +114,16 @@
                padding:7px 15px;font:inherit;font-size:13px;cursor:pointer}
 /* pendant la traversee, la photo derriere s'elargit : c'est ce qui donne
    la sensation d'avancer plutot que de regarder une image grossir */
-html.intro-active .hero img.fond{animation:fond-avance 1.65s cubic-bezier(.36,0,.72,1) 1.85s both}
-@keyframes fond-avance{from{transform:scale(1.18)}to{transform:scale(1)}}
+html.intro-active .hero img.fond{animation:fond-avance 2.05s cubic-bezier(.42,0,.78,.62) 1.85s both}
+@keyframes fond-avance{from{transform:scale(0.94)}to{transform:scale(1)}}
 @media (prefers-reduced-motion:reduce){.intro{display:none}}
 </style>
 </head>
 <body>
 <div class="intro" id="ouverture" aria-hidden="true">
   <div class="scene">
-    <div class="voilage"><i class="haut"></i><i class="bas"></i><i class="gauche"></i><i class="droite"></i></div>
+    <div class="mur-int"></div>
+    <div class="voilage"></div>
     <div class="bloc">
       <div class="baie"></div>
       <div class="vantail g">
@@ -147,15 +180,15 @@ html.intro-active .hero img.fond{animation:fond-avance 1.65s cubic-bezier(.36,0,
           <path class="trait" pathLength="1" style="animation-delay:0.180s" d="M968.3 756.7 Q968.9 769.2 968.9 775.5 Q968.9 781.8 968.8 788.1 L968.6 794.4"/>
           <path class="trait" pathLength="1" style="animation-delay:0.200s" d="M971.2 791.6 Q915.8 791.3 888.1 791.6 Q860.4 791.8 832.7 791.8 Q805.0 791.9 777.3 792.1 Q749.6 792.3 721.9 792.4 Q694.2 792.4 666.5 792.0 Q638.8 791.7 611.1 791.8 Q583.4 791.9 555.7 791.9 Q528.0 792.0 500.3 792.3 Q472.6 792.7 444.9 792.7 Q417.2 792.6 389.5 792.3 Q361.8 792.1 334.1 792.0 Q306.4 791.9 278.7 791.8 Q251.0 791.6 223.3 791.8 Q195.6 791.9 167.9 792.3 Q140.2 792.8 112.5 792.1 Q84.8 791.5 57.1 792.1 L29.4 792.7"/>
           <path class="trait" pathLength="1" style="animation-delay:0.220s" d="M32.3 794.1 Q31.0 781.6 31.0 775.4 Q31.1 769.2 31.9 763.0 L32.7 756.8"/>
-          <path class="trait leger" pathLength="1" style="animation-delay:0.240s" d="M69.9 813.8 Q80.2 807.7 85.2 804.4 Q90.3 801.1 95.0 797.4 L99.8 793.7"/>
-          <path class="trait leger" pathLength="1" style="animation-delay:0.260s" d="M166.1 814.2 Q176.0 807.3 181.0 804.0 Q186.0 800.7 191.1 797.5 L196.2 794.4"/>
-          <path class="trait leger" pathLength="1" style="animation-delay:0.280s" d="M262.0 813.9 Q272.2 807.6 277.0 803.9 Q281.8 800.3 286.9 797.2 L292.0 794.1"/>
-          <path class="trait leger" pathLength="1" style="animation-delay:0.300s" d="M358.1 814.1 Q367.7 806.9 372.8 803.7 Q377.9 800.5 383.1 797.4 L388.2 794.3"/>
-          <path class="trait leger" pathLength="1" style="animation-delay:0.320s" d="M454.1 814.2 Q463.8 807.0 468.8 803.8 Q473.9 800.6 479.0 797.3 L484.0 793.9"/>
-          <path class="trait leger" pathLength="1" style="animation-delay:0.340s" d="M550.2 814.3 Q559.9 807.1 564.7 803.6 Q569.6 800.1 574.8 797.1 L580.1 794.1"/>
-          <path class="trait leger" pathLength="1" style="animation-delay:0.360s" d="M646.0 814.0 Q656.6 808.3 661.4 804.6 Q666.2 800.9 671.0 797.3 L675.8 793.7"/>
-          <path class="trait leger" pathLength="1" style="animation-delay:0.380s" d="M742.0 814.0 Q751.8 807.1 756.9 803.8 Q761.9 800.5 766.9 797.1 L771.9 793.8"/>
-          <path class="trait leger" pathLength="1" style="animation-delay:0.400s" d="M838.0 814.1 Q847.9 807.1 852.9 803.8 Q857.8 800.4 862.8 797.1 L867.8 793.7"/>
+          <path class="trait leger ombre" pathLength="1" style="animation-delay:0.240s" d="M69.9 813.8 Q80.2 807.7 85.2 804.4 Q90.3 801.1 95.0 797.4 L99.8 793.7"/>
+          <path class="trait leger ombre" pathLength="1" style="animation-delay:0.260s" d="M166.1 814.2 Q176.0 807.3 181.0 804.0 Q186.0 800.7 191.1 797.5 L196.2 794.4"/>
+          <path class="trait leger ombre" pathLength="1" style="animation-delay:0.280s" d="M262.0 813.9 Q272.2 807.6 277.0 803.9 Q281.8 800.3 286.9 797.2 L292.0 794.1"/>
+          <path class="trait leger ombre" pathLength="1" style="animation-delay:0.300s" d="M358.1 814.1 Q367.7 806.9 372.8 803.7 Q377.9 800.5 383.1 797.4 L388.2 794.3"/>
+          <path class="trait leger ombre" pathLength="1" style="animation-delay:0.320s" d="M454.1 814.2 Q463.8 807.0 468.8 803.8 Q473.9 800.6 479.0 797.3 L484.0 793.9"/>
+          <path class="trait leger ombre" pathLength="1" style="animation-delay:0.340s" d="M550.2 814.3 Q559.9 807.1 564.7 803.6 Q569.6 800.1 574.8 797.1 L580.1 794.1"/>
+          <path class="trait leger ombre" pathLength="1" style="animation-delay:0.360s" d="M646.0 814.0 Q656.6 808.3 661.4 804.6 Q666.2 800.9 671.0 797.3 L675.8 793.7"/>
+          <path class="trait leger ombre" pathLength="1" style="animation-delay:0.380s" d="M742.0 814.0 Q751.8 807.1 756.9 803.8 Q761.9 800.5 766.9 797.1 L771.9 793.8"/>
+          <path class="trait leger ombre" pathLength="1" style="animation-delay:0.400s" d="M838.0 814.1 Q847.9 807.1 852.9 803.8 Q857.8 800.4 862.8 797.1 L867.8 793.7"/>
       </svg>
     </div>
   </div>
@@ -474,7 +507,7 @@ prot&eacute;g&eacute;s par le droit d&rsquo;auteur, reproduction interdite sans 
   if (reduit || deja) { fin(); return; }
   try { sessionStorage.setItem('sl-intro','1'); } catch(e){}
   racine.classList.add('intro-active');
-  var t = setTimeout(fin, 3560);
+  var t = setTimeout(fin, 3960);
   function couper(){ clearTimeout(t); fin(); }
   ov.addEventListener('click', couper);
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape') couper(); }, {once:true});
