@@ -97,24 +97,61 @@ document.querySelectorAll(".cadre[data-photos]").forEach(function (cadre) {
   var points = cadre.querySelectorAll(".points span");
   // le pele-mele de l'accueil defile plus vite (demande du 19/08)
   var cadence = cadre.closest(".pelemele") ? 900 : 1500;
-  var i = 0, minuteur = null;
+  // CORRIGE le 23/08 (signale par Sebastien) : la photo affichee changeait trop vite.
+  // 1. au survol, la premiere photo - le rendu final, celle qui vend - restait moins
+  //    d'une seconde avant de laisser place aux photos de chantier ;
+  // 2. un clic sur une pastille ne remettait pas le compteur a zero : le minuteur en
+  //    cours faisait sauter a la photo suivante dans la foulee ;
+  // 3. en quittant la vignette, elle gardait la photo de travaux affichee.
+  // D'ou : un temps de pause (double de la cadence) avant chaque relance, et retour
+  // au rendu final quand la souris s'en va.
+  // pause apres un clic sur une pastille ; l'attente de depart, elle, est un peu
+  // plus courte (reglage de Sebastien le 23/08 : "la premiere un peu plus rapide")
+  var pause = cadence * 2;
+  var depart = Math.round(cadence * 1.5);
+  var i = 0, minuteur = null, attente = null;
+  // ce que la vignette affiche au repos (image legere) : on y revient en partant
+  var srcRepos = img.getAttribute("src");
+  var srcsetRepos = src ? src.getAttribute("srcset") : null;
+  function repos() {
+    i = 0;
+    if (src && srcsetRepos) src.setAttribute("srcset", srcsetRepos);
+    img.setAttribute("src", srcRepos);
+    points.forEach(function (p, j) { p.className = (j === 0) ? "actif" : ""; });
+  }
   function montre(n) {
     i = (n + photos.length) % photos.length;
     if (src) src.srcset = "photos/" + photos[i].replace(/\.jpg$/i, ".webp");
     img.src = "photos/" + photos[i];
     points.forEach(function (p, j) { p.className = (j === i) ? "actif" : ""; });
   }
+  function enchaine() {
+    clearTimeout(attente); attente = null;
+    clearInterval(minuteur);
+    minuteur = setInterval(function () { montre(i + 1); }, cadence);
+  }
+  function patiente(delai) {
+    clearInterval(minuteur); minuteur = null;
+    clearTimeout(attente);
+    attente = setTimeout(function () { montre(i + 1); enchaine(); }, delai);
+  }
+  function stoppe() {
+    clearInterval(minuteur); clearTimeout(attente);
+    minuteur = null; attente = null;
+  }
   points.forEach(function (p, j) {
     p.addEventListener("click", function (e) {
-      e.preventDefault(); e.stopPropagation(); montre(j);
+      e.preventDefault(); e.stopPropagation();
+      montre(j);
+      if (minuteur || attente) patiente(pause);
     });
   });
   cadre.addEventListener("mouseenter", function () {
-    if (minuteur) return;
-    minuteur = setInterval(function () { montre(i + 1); }, cadence);
+    if (minuteur || attente) return;
+    patiente(depart);
   });
   cadre.addEventListener("mouseleave", function () {
-    clearInterval(minuteur); minuteur = null;
+    stoppe(); repos();
   });
 });
 // pastilles de la carte : clic (ou tape sur mobile) = etiquette qui reste ouverte
