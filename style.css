@@ -438,6 +438,9 @@ section,div.immersion{scroll-snap-align:start}
 .galerie .cadre:hover img{transform:scale(1.04)}
 
 .article p{max-width:660px}
+.article ul{max-width:660px;margin:0 0 18px;padding-left:22px}
+.article li{margin:0 0 9px;line-height:1.65}
+.article li b{color:var(--bleu-fonce)}
 .article .chapo{font-size:19px;color:var(--bleu-fonce);line-height:1.55}
 
 .contact{background:var(--fond-doux);border:1px solid var(--bord);border-radius:8px;
