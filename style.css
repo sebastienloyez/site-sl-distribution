@@ -336,7 +336,8 @@ svg.vitrage{position:absolute;inset:0;width:100%;height:100%;z-index:0}
                 gap:14px;margin:26px 0 8px}
 .produit-photos img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;
                     display:block;transition:transform .3s ease}
-.produit-photos a:hover img{transform:scale(1.03)}
+/* le zoom au survol vaut aussi pour les photos sans lien (visuels produit) */
+.produit-photos a:hover img,.produit-photos img:hover{transform:scale(1.03)}
 .produit-liens{color:var(--gris);margin-top:18px}
 
 /* --- devis guide en 3 questions + FAQ (valide par Sebastien le 20/08) --- */
@@ -527,6 +528,12 @@ footer .liens a{margin-right:18px}
    (celui qui vient d'arriver n'a rien a fuir), tient en 54 px, reprend les
    couleurs du site, et ne dit rien de plus que "appeler" et "devis". */
 picture{display:contents}
+/* CORRIGE le 23/08 (repere par Sebastien sur la page murs rideaux) : avec
+   picture{display:contents}, les <source> remontent eux aussi dans la grille et y
+   occupent une case vide - d ou des photos decalees et des trous. Le navigateur ne
+   les cache pas tout seul (source n est pas dans la liste display:none de la spec),
+   donc on le fait ici. */
+source{display:none}
 /* CORRIGE le 23/08 apres essai de Sebastien sur iPhone : un appui ne declenchait
    rien, il fallait un appui long. Trois causes reunies, toutes corrigees ici.
    1. La barre etait collee au bas de l ecran. Sur iPhone, le bas est la zone de la
