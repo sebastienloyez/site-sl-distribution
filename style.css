@@ -515,3 +515,82 @@ footer .liens a{margin-right:18px}
   .wrap{padding:0 18px}
   nav.principale ul{gap:14px}
 }
+
+/* --- BARRE DE CONTACT (telephone mobile) -------------------------------------
+   Le defaut le plus couteux du site : le numero n'etait cliquable que sur 3 pages
+   sur 35, alors que les visiteurs les plus chauds sont sur les fiches chantier.
+   Consigne de Sebastien (23/08) : "faut pas trop faire vendeur". Donc discrete -
+   elle n'existe que sur telephone, n'apparait qu'apres un ecran de defilement
+   (celui qui vient d'arriver n'a rien a fuir), tient en 54 px, reprend les
+   couleurs du site, et ne dit rien de plus que "appeler" et "devis". */
+picture{display:contents}
+.appel{position:fixed;left:0;right:0;bottom:0;z-index:80;display:none;gap:10px;
+       padding:8px 12px;padding-bottom:calc(8px + env(safe-area-inset-bottom,0px));
+       background:rgba(255,255,255,.97);border-top:1px solid var(--bord);
+       box-shadow:0 -2px 14px rgba(20,40,60,.10);
+       transform:translateY(115%);transition:transform .28s ease}
+.appel.visible{transform:none}
+.appel a{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;
+         min-height:42px;border-radius:8px;font-size:15px;font-weight:600;
+         text-decoration:none}
+.appel .tel{background:var(--bleu);color:#fff}
+.appel .dev{background:#fff;color:var(--bleu);border:1px solid var(--bleu)}
+.appel svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;
+           stroke-linecap:round;stroke-linejoin:round;flex:none}
+@media (max-width:760px){.appel{display:flex}
+  footer{padding-bottom:80px}}
+@media (prefers-reduced-motion:reduce){.appel{transition:none}}
+
+/* temoignages : sobres, au trait, pas des etoiles jaunes */
+.temoignages{background:var(--fond-doux);border-top:1px solid var(--bord);
+             border-bottom:1px solid var(--bord)}
+.temoignages h2{margin-top:0}
+.paroles{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.paroles figure{margin:0;padding:20px 22px;background:#fff;border:1px solid var(--bord);
+                border-radius:8px}
+.paroles blockquote{margin:0;font-size:16.5px;line-height:1.6;color:var(--texte)}
+.paroles blockquote::before{content:"“";color:var(--accent);font-size:30px;
+                            line-height:0;vertical-align:-8px;margin-right:4px}
+.paroles figcaption{margin-top:12px;font-size:14px;color:var(--gris)}
+
+/* liens vers les pages de commune, sous la carte. Une ligne de texte, pas un
+   menu : c'est d'abord la pour que Google trouve les pages de secteur. */
+.par-commune{margin:14px 0 0;font-size:14.5px;color:var(--gris);line-height:2}
+.par-commune span{margin-right:6px}
+.par-commune a{display:inline-block;margin:0 6px 0 0;padding:3px 11px;
+               border:1px solid var(--bord);border-radius:16px;color:var(--bleu);
+               text-decoration:none;background:#fff}
+.par-commune a:hover{border-color:var(--bleu);background:var(--fond-doux)}
+
+.liste-produits{list-style:none;padding:0;margin:0 0 26px;display:flex;
+                flex-wrap:wrap;gap:8px 10px}
+.liste-produits a{display:inline-block;padding:7px 14px;border:1px solid var(--bord);
+                  border-radius:6px;color:var(--bleu);text-decoration:none;
+                  font-size:14.5px;background:#fff}
+.liste-produits a:hover{border-color:var(--bleu);background:var(--fond-doux)}
+
+/* --- filtre des realisations -------------------------------------------------
+   Sobre : des pastilles au trait, pas des onglets colores. Sans JavaScript, la
+   barre ne s'affiche pas comme active mais la grille reste entiere - on ne peut
+   pas se retrouver devant une page vide. */
+.filtres{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.filtres button{font:inherit;font-size:14px;cursor:pointer;padding:7px 14px;
+                border:1px solid var(--bord);border-radius:20px;background:#fff;
+                color:var(--gris);transition:background .15s,color .15s,border-color .15s}
+.filtres button:hover{border-color:var(--bleu);color:var(--bleu)}
+.filtres button.actif{background:var(--bleu);border-color:var(--bleu);color:#fff}
+.compte{margin:0 0 22px;font-size:13.5px;color:var(--gris)}
+.grille li[hidden]{display:none}
+@media (max-width:560px){.filtres{gap:6px}.filtres button{padding:6px 12px;font-size:13.5px}}
+
+/* le meme geste, en bas des fiches chantier : c'est la que le visiteur se
+   projette. Un encadre au trait, pas un bandeau. */
+.apres-chantier{margin:30px 0 6px;padding:18px 20px;border:1px solid var(--bord);
+                border-left:3px solid var(--accent);border-radius:6px;
+                background:var(--fond-doux)}
+.apres-chantier p{margin:0 0 10px}
+.apres-chantier p:last-child{margin:0}
+.apres-chantier .joindre{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center}
+.apres-chantier .joindre a{font-weight:600;text-decoration:none}
+.apres-chantier .joindre .num{font-size:18px}
+@media (max-width:560px){.apres-chantier{padding:16px}}
