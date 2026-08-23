@@ -489,6 +489,19 @@ section,div.immersion{scroll-snap-align:start}
 .fdevis button:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(20,50,75,.25)}
 .fdevis .note{font-size:13px;color:var(--gris);margin-top:12px}
 
+
+/* --- comptes reseaux : pastilles au trait, qui s'inversent au survol --- */
+.reseaux{display:flex;gap:11px;align-items:center;flex-wrap:wrap}
+.reseaux a{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;
+           background:#fff;border:1px solid var(--bord);border-radius:10px;color:var(--bleu);
+           transition:transform .18s ease,background .18s ease,color .18s ease,border-color .18s ease}
+.reseaux a:hover{transform:translateY(-3px);background:var(--bleu);color:#fff;border-color:var(--bleu)}
+.reseaux svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;
+             stroke-linecap:round;stroke-linejoin:round}
+footer .reseaux{margin:0 0 16px}
+.suivre{margin:46px auto 0;text-align:center}
+.suivre p{margin:0 0 14px;color:var(--gris)}
+.suivre .reseaux{justify-content:center}
 footer{background:#eef1f4;color:var(--gris);font-size:13.5px;padding:28px 0 34px;line-height:1.6}
 footer a{color:var(--bleu)}
 footer p{margin:0 0 8px}
