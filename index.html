@@ -81,8 +81,16 @@
 
 /* vitrage opaque : un verre translucide laissait deviner le site a travers les
    battants encore fermes, et le site arrivait avant qu'on soit entre */
+/* CORRIGE le 29/08 (repere par Sebastien) : les vantaux tournent jusqu'a 102 deg,
+   donc ILS DEPASSENT LE PROFIL. Passe 90 deg on voyait leur DOS -- un simple div
+   rempli du degrade de fond, ecrase par la perspective en une bande plate tres
+   sombre plantee de chaque cote de la baie : les "cadres fonces" de l'ouverture.
+   backface-visibility:hidden fait disparaitre le vantail des qu'il passe de profil,
+   c'est-a-dire a largeur nulle : aucun a-coup, et on garde le debord a 102 deg qui
+   donne le naturel du battant qui s'efface derriere soi. */
 .intro .vantail{position:absolute;top:7.317%;height:82.927%;width:42%;z-index:2;
-                background:linear-gradient(180deg,#22608c 0%,#164764 55%,#0f3448 100%) center/100vw 100vh no-repeat, #164764;will-change:transform}
+                background:linear-gradient(180deg,#22608c 0%,#164764 55%,#0f3448 100%) center/100vw 100vh no-repeat, #164764;will-change:transform;
+                backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .intro .vantail svg{display:block;width:100%;height:100%;overflow:visible}
 .intro .vantail.g{left:8%;transform-origin:left center;
                   animation:ouvrir-g 1.0s cubic-bezier(.34,.02,.2,1) 0.82s forwards}
